@@ -338,11 +338,11 @@ export async function searchProduct(req, res) {
 
       
         const [products, totalProducts] = await Promise.all([
-            Product.find(searchQuery)
+            productModel.find(searchQuery)
                 .skip(skip)
                 .limit(Number(limit))
                 .lean(), 
-            Product.countDocuments(searchQuery)
+            productModel.countDocuments(searchQuery)
         ]);
 
         const totalPages = Math.ceil(totalProducts / Number(limit));
