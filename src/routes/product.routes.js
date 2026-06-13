@@ -1,5 +1,5 @@
 import express from 'express';
-import { uploadProduct, card, deleteProduct, getCartProducts, updateProduct, removeCartProduct, getAllProducts } from '../controllers/product.controller.js';
+import { uploadProduct, card, deleteProduct, getCartProducts, updateProduct, removeCartProduct, getAllProducts, searchProduct } from '../controllers/product.controller.js';
 import multer from 'multer';
 import { verifyToken } from '../middleware/auth.middleware.js';
 
@@ -22,6 +22,8 @@ productRouter.post('/update-product',verifyToken, updateProduct);
 productRouter.post('/remove-cart-product',verifyToken, removeCartProduct);
 
 productRouter.get('/get-all-products', getAllProducts);
+
+productRouter.get('/search-product', searchProduct);
 
 
 
