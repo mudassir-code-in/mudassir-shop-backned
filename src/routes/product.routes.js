@@ -22,8 +22,3 @@ productRouter.post('/update-product',verifyToken, updateProduct);
 productRouter.post('/remove-cart-product',verifyToken, removeCartProduct);
 
 productRouter.get('/get-all-products', getAllProducts);
-
-productRouter.get('/search-product', searchProduct);
-
-
-
