@@ -11,17 +11,17 @@ connectDB();
 
 connectRedis();
 
-transporter.verify((error, success) => {
-    if(error){
-        console.log('Email server connecting error', error);
-    } else {
-        console.log('Email server ready to send message');
-    }
-});
 
 
 const port = 3000
 
 app.listen(port, () => {
     console.log('server is running on 3000 port');
+    transporter.verify((error, success) => {
+        if (error) {
+            console.log('Email server connecting error', error);
+        } else {
+            console.log('Email server ready to send message');
+        }
+    });
 });
