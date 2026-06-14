@@ -16,6 +16,7 @@ transporter.verify((error, success) => {
         console.log('Email server connecting error', error);
     } else {
         console.log('Email server ready to send message');
+        console.log("DEBUG: Email User is:", process.env.EMAIL_USER);
     }
 });
 
