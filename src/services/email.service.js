@@ -2,18 +2,19 @@ import nodemailer from 'nodemailer';
 
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp-relay.brevo.com',
-    port: 587,
-    secure: false, 
+    service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    connectionTimeout: 10000, 
+    greetingTimeout: 10000,   
+    socketTimeout: 30000
 });
 
 transporter.verify((error, success) => {
     if (error) {
-        console.log('Brevo connecting error', error);
+        console.log('email connecting error', error);
     } else {
         console.log('Email server ready to send message');
     }
@@ -30,7 +31,7 @@ export const sendMail = async (to, subject, text, html) => {
         });
 
         console.log('Email sent successfully:', info.messageId);
-        return info; // Response return karna achhi practice hai
+        return info;
     } catch (error) {
         console.log('Email sending error', error);
         throw error;

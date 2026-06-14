@@ -71,7 +71,7 @@ export async function register(req, res) {
 
         const html = getOtpHtml(otp);
 
-       await sendMail(email, 'OTP Verification', `Your OTP Code is ${otp}`, html).catch(async (error) => {
+        sendMail(email, 'OTP Verification', `Your OTP Code is ${otp}`, html).catch(async (error) => {
 
             await redisClient.del(redisKey);
         });
