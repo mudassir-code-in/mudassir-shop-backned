@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'https://mudassir-shop.vercel.app/', 
+    origin: 'https://mudassir-shop.vercel.app', 
     credentials: true,             
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
