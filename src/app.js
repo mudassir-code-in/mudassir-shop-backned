@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import { productRouter } from "./routes/product.routes.js";
 import { orderRouter } from "./routes/order.routes.js";
 import cors from 'cors'
+import { healthRouter } from "./routes/health.routes.js";
 
 
 
@@ -23,6 +24,7 @@ app.use(cors({
 app.use('/api/auth', authRouter);
 app.use('/api/product', productRouter);
 app.use('/api/order', orderRouter);
+app.use('/api/health', healthRouter);
 
 
 export default app;
