@@ -1,40 +1,22 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',       
-    port: 465,               
-    secure: true,               
-    family: 4,                  
-    auth: {
-        user: process.env.EMAIL_USER, 
-        pass: process.env.EMAIL_PASS  
-    },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 30000
-});
-
-transporter.verify((error, success) => {
-    if (error) {
-        console.log('email connecting error', error);
-    } else {
-        console.log('Email server ready to send message');
-    }
-});
+// API Key ko environment variable se lena
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendMail = async (to, subject, text, html) => {
     try {
-        const info = await transporter.sendMail({
-            from: `"Mudassir Developer" <${process.env.EMAIL_USER}>`,
-            to,
-            subject,
-            text,
-            html
+        const response = await resend.emails.send({
+            from: 'onboarding@resend.dev', 
+            to: [to],
+            subject: subject,
+            text: text,
+            html: html
         });
-        console.log('Email sent successfully:', info.messageId);
-        return info;
+
+        console.log('Email sent successfully:', response?.id);
+        return response;
     } catch (error) {
-        console.log('Email sending error', error);
-        throw error;
+        console.error('Resend API Error:', error);
+        throw error; 
     }
 }
